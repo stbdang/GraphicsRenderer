@@ -6,6 +6,6 @@ target 'iOSRenderer' do
 end
 
 target 'MacOSRenderer' do
-  platform :osx, '10.10'
+  platform :osx, '10.15'
   pod 'GraphicsRenderer', :path => '../'    
 end

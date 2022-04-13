@@ -162,7 +162,7 @@ public final class ImageRenderer: Renderer {
      - returns: A new image
      */
     public func image(actions: (Context) -> Void) -> GRImage {
-        var image: Image?
+        var image: GRImage?
         
         try? runDrawingActions(actions) { context in
             image = context.currentImage
