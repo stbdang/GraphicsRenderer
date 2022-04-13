@@ -22,7 +22,7 @@
 
 #if os(OSX)
     import AppKit
-    public typealias Image = NSImage
+    public typealias GRImage = NSImage
     public typealias Screen = NSScreen
 
     extension NSScreen {
@@ -46,7 +46,7 @@
     }
 #else
     import UIKit
-    public typealias Image = UIImage
+    public typealias GRImage = UIImage
     public typealias Screen = UIScreen
 
     extension UIScreen {

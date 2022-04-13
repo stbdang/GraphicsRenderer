@@ -92,7 +92,7 @@ public final class ImageRendererContext: RendererContext {
     public let cgContext: CGContext
     
     /// Returns a UIImage representing the current state of the renderer's CGContext
-    public var currentImage: Image {
+    public var currentImage: GRImage {
         #if os(OSX)
             let cgImage = CGContext.current!.makeImage()!
             return NSImage(cgImage: cgImage, size: format.bounds.size)
@@ -161,7 +161,7 @@ public final class ImageRenderer: Renderer {
      
      - returns: A new image
      */
-    public func image(actions: (Context) -> Void) -> Image {
+    public func image(actions: (Context) -> Void) -> GRImage {
         var image: Image?
         
         try? runDrawingActions(actions) { context in
