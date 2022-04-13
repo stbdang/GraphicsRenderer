@@ -7,7 +7,7 @@ import SwiftUI
     import AppKit
 #endif
 
-extension Image {
+public extension Image {
     init(grImage: GRImage) {
 #if os(iOS)
         self.init(uiImage: grImage)
