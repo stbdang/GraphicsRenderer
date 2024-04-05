@@ -29,18 +29,18 @@
 /**
  *  Represents an image renderer format
  */
-public final class ImageRendererFormat: RendererFormat {
+public final class GRImageRendererFormat: RendererFormat {
 
     /**
      Returns a default format, configured for this device. On OSX, this will flip the context to match iOS drawing.
      
      - returns: A new format
      */
-    public static func `default`() -> ImageRendererFormat {
+    public static func `default`() -> GRImageRendererFormat {
         #if os(OSX)
-            return ImageRendererFormat(flipped: true)
+            return GRImageRendererFormat(flipped: true)
         #else
-            return ImageRendererFormat(flipped: false)
+            return GRImageRendererFormat(flipped: false)
         #endif
     }
     
@@ -83,10 +83,10 @@ public final class ImageRendererFormat: RendererFormat {
 /**
  *  Represents a new renderer context
  */
-public final class ImageRendererContext: RendererContext {
+public final class GRImageRendererContext: RendererContext {
     
     /// The associated format
-    public let format: ImageRendererFormat
+    public let format: GRImageRendererFormat
     
     /// The associated CGContext
     public let cgContext: CGContext
@@ -109,14 +109,14 @@ public final class ImageRendererContext: RendererContext {
      
      - returns: A new renderer context
      */
-    internal init(format: ImageRendererFormat, cgContext: CGContext) {
+    internal init(format: GRImageRendererFormat, cgContext: CGContext) {
         self.format = format
         self.cgContext = cgContext
     }
     
 }
 
-extension ImageRenderer {
+extension GRImageRenderer {
     public convenience init(bounds: CGRect) {
         self.init(size: bounds.size, format: nil)
     }
@@ -125,16 +125,16 @@ extension ImageRenderer {
 /**
  *  Represents an image renderer used for drawing into a UIImage
  */
-public final class ImageRenderer: Renderer {
+public final class GRImageRenderer: Renderer {
     
     /// The associated context type
-    public typealias Context = ImageRendererContext
+    public typealias Context = GRImageRendererContext
     
     /// Returns true
     public let allowsImageOutput: Bool = true
     
     /// Returns the format for this renderer
-    public let format: ImageRendererFormat
+    public let format: GRImageRendererFormat
     
     /**
      Creates a new renderer with the specified size and format
@@ -144,14 +144,14 @@ public final class ImageRenderer: Renderer {
      
      - returns: A new image renderer
      */
-    public init(size: CGSize, format: ImageRendererFormat? = nil) {
+    public init(size: CGSize, format: GRImageRendererFormat? = nil) {
         guard size != .zero else { fatalError("size cannot be zero") }
         
         let bounds = CGRect(origin: .zero, size: size)
         let opaque = format?.opaque ?? false
         let scale = format?.scale ?? Screen.mainScreen.scale
         
-        self.format = ImageRendererFormat(bounds: bounds, opaque: opaque, scale: scale, flipped: format?.isFlipped ?? false)
+        self.format = GRImageRendererFormat(bounds: bounds, opaque: opaque, scale: scale, flipped: format?.isFlipped ?? false)
     }
 
     /**
